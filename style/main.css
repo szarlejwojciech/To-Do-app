@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap");
 *,
 *::before,
 *::after {
@@ -7,7 +8,7 @@
 }
 
 body {
-  font: 16px/100% sans-serif;
+  font: 500 16px/100% 'Poppins', sans-serif;
   min-height: 100vh;
   background: linear-gradient(135deg, #F45E7D 0%, rgba(255, 35, 64, 0) 70%), linear-gradient(225deg, #6E73FF 10%, rgba(51, 58, 253, 0) 80%), linear-gradient(315deg, #48FF98 10%, rgba(9, 245, 48, 0) 80%), linear-gradient(45deg, #DC48FF 100%, rgba(255, 251, 22, 0) 50%);
   display: -webkit-box;
@@ -171,5 +172,30 @@ main .wrapper input:focus-within + label, main .wrapper input:focus + label, mai
 
 main .wrapper input[type="search"] {
   padding-right: 20px;
+}
+
+main header h1 {
+  position: relative;
+  text-align: center;
+  color: white;
+  text-transform: uppercase;
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+
+main header h1::before, main header h1::after {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 2px;
+  top: calc(50% - 1px);
+  left: 0;
+  background: white;
+}
+
+main header h1::after {
+  left: auto;
+  right: 0;
 }
 /*# sourceMappingURL=main.css.map */

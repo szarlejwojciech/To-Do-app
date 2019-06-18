@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap');
+
 *,
 *::before,
 *::after {
@@ -6,7 +8,7 @@
 }
 
 body {
-  font: 16px/100% sans-serif;
+  font: 500 16px/100% 'Poppins', sans-serif;
   min-height: 100vh;
   background:
     linear-gradient(135deg, #F45E7D 0%, rgba(255, 35, 64, 0)70%),
@@ -149,6 +151,34 @@ main {
     }
   }
 
+  header {
 
+    h1 {
+      position: relative;
+      text-align: center;
+      color: white;
+      text-transform: uppercase;
+      font-size: 26px;
+      font-weight: 400;
+      letter-spacing: 2px;
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        width: 200px;
+        height: 2px;
+        top: calc(50% - 1px);
+        left: 0;
+        background: white;
+      }
+
+      &::after {
+        left: auto;
+        right: 0;
+      }
+
+    }
+  }
 
 }
