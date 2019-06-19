@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap");
+/* Variables */
+/* style */
 *,
 *::before,
 *::after {
@@ -7,10 +9,21 @@
           box-sizing: border-box;
 }
 
+::-moz-selection {
+  background: rgba(253, 27, 185, 0.3);
+}
+
+::selection {
+  background: rgba(253, 27, 185, 0.3);
+}
+
 body {
   font: 500 16px/100% 'Poppins', sans-serif;
   min-height: 100vh;
   background: linear-gradient(135deg, #F45E7D 0%, rgba(255, 35, 64, 0) 70%), linear-gradient(225deg, #6E73FF 10%, rgba(51, 58, 253, 0) 80%), linear-gradient(315deg, #48FF98 10%, rgba(9, 245, 48, 0) 80%), linear-gradient(45deg, #DC48FF 100%, rgba(255, 251, 22, 0) 50%);
+}
+
+button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -20,12 +33,6 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-}
-
-form button,
-li label,
-li button {
-  display: block;
   position: absolute;
   z-index: 2;
   right: 0;
@@ -43,88 +50,135 @@ li button {
   cursor: pointer;
 }
 
-form button span,
-li label span,
-li button span {
-  -webkit-transition: .3s transform ease;
-  transition: .3s transform ease;
+button span {
+  -webkit-transition: .5s transform ease;
+  transition: .5s transform ease;
   will-change: transform;
   display: block;
 }
 
-form button span::before, form button span::after,
-li label span::before,
-li label span::after,
-li button span::before,
-li button span::after {
+button span::before, button span::after {
   content: '';
   width: 23px;
   height: 6px;
   background: #fff;
   position: absolute;
-  top: 50%;
-  left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
 }
 
-form button span::after,
-li label span::after,
-li button span::after {
+button span::after {
   -webkit-transform: translate(-50%, -50%) rotate(90deg);
           transform: translate(-50%, -50%) rotate(90deg);
 }
 
-form button::after,
-li label::after,
-li button::after {
+button::after {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #00000010;
+  background-color: rgba(0, 0, 0, 0.05);
   border-radius: 50%;
-  -webkit-box-shadow: inset 0 0 1px 3px rgba(0, 0, 0, 0.05), inset 7px 7px 8px rgba(0, 0, 0, 0.25);
-          box-shadow: inset 0 0 1px 3px rgba(0, 0, 0, 0.05), inset 7px 7px 8px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: inset 4px 4px 3px 4px rgba(0, 0, 0, 0.2), inset 7px 7px 8px 2px rgba(0, 0, 0, 0.25);
+          box-shadow: inset 4px 4px 3px 4px rgba(0, 0, 0, 0.2), inset 7px 7px 8px 2px rgba(0, 0, 0, 0.25);
   opacity: 0;
-  -webkit-transition: .3s opacity ease;
-  transition: .3s opacity ease;
+  -webkit-transition: .5s opacity ease;
+  transition: .5s opacity ease;
   will-change: opacity;
 }
 
-form button:hover::after,
-li label:hover::after,
-li button:hover::after {
+button.check {
+  right: 58px;
+  left: auto;
+  width: 30px;
+  height: 30px;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#f5f5f5));
+  background-image: linear-gradient(180deg, #FFFFFF, #f5f5f5);
+  -webkit-box-shadow: inset 0 0 0 2px #f2f2f2;
+          box-shadow: inset 0 0 0 2px #f2f2f2;
+}
+
+button.check::after {
+  -webkit-box-shadow: inset 2px 2px 1px 1px rgba(0, 0, 0, 0.15), inset 2px 2px 1px 3px rgba(0, 0, 0, 0.05);
+          box-shadow: inset 2px 2px 1px 1px rgba(0, 0, 0, 0.15), inset 2px 2px 1px 3px rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+button.check span::before, button.check span::after {
+  background: #dadada;
+  width: 5px;
+  height: 3px;
+  -webkit-transform: translate(-74%, 0%) rotate(45deg);
+          transform: translate(-74%, 0%) rotate(45deg);
+}
+
+button.check span::after {
+  width: 10px;
+  -webkit-transform: translate(-26%, -50%) rotate(-45deg);
+          transform: translate(-26%, -50%) rotate(-45deg);
+}
+
+button.delete {
+  right: 14px;
+  width: 30px;
+  height: 30px;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ff8a8a), to(#cf5e5e));
+  background-image: linear-gradient(180deg, #ff8a8a, #cf5e5e);
+  -webkit-box-shadow: inset 0 0 0 2px #e57171;
+          box-shadow: inset 0 0 0 2px #e57171;
+}
+
+button.delete::after {
+  -webkit-box-shadow: inset 2px 2px 1px 1px rgba(0, 0, 0, 0.15), inset 2px 2px 1px 3px rgba(0, 0, 0, 0.05);
+          box-shadow: inset 2px 2px 1px 1px rgba(0, 0, 0, 0.15), inset 2px 2px 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+button.delete span::before, button.delete span::after {
+  width: 13px;
+  height: 3px;
+  -webkit-transform: translate(-50%, -50%) rotate(-45deg);
+          transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+button.delete span::after {
+  -webkit-transform: translate(-50%, -50%) rotate(45deg);
+          transform: translate(-50%, -50%) rotate(45deg);
+}
+
+button:hover, button:focus {
+  outline: none;
+}
+
+button:hover::after, button:focus::after {
   opacity: .8;
 }
 
-form button:hover span,
-li label:hover span,
-li button:hover span {
+button:hover span, button:focus span {
   -webkit-transform: scale(0.85);
           transform: scale(0.85);
 }
 
-form button:active,
-li label:active,
-li button:active {
+button:active {
   outline: none;
 }
 
-form button:active::after,
-li label:active::after,
-li button:active::after {
+button:active::after {
   opacity: 1;
 }
 
 main {
-  min-width: 600px;
+  width: 600px;
+  margin: 10% auto;
+}
+
+main form {
+  width: 100%;
 }
 
 main .wrapper {
-  width: 600px;
+  width: 100%;
   margin-bottom: 30px;
   position: relative;
   display: -webkit-box;
@@ -147,17 +201,18 @@ main .wrapper label {
   -webkit-transform-origin: left;
           transform-origin: left;
   cursor: text;
+  pointer-events: none;
 }
 
 main .wrapper input {
-  width: 600px;
+  width: 100%;
   padding: 14px 20px;
   padding-right: 60px;
   font-size: 23px;
   border: 3px solid #E1E1E1;
   border-radius: 60px;
-  -webkit-box-shadow: 0px 5px 8px 0 rgba(0, 0, 0, 0.15), -2px 0 3px 0 rgba(0, 0, 0, 0.1);
-          box-shadow: 0px 5px 8px 0 rgba(0, 0, 0, 0.15), -2px 0 3px 0 rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0px 20px 20px -10px rgba(0, 0, 0, 0.3), 0px 8px 9px -4px rgba(0, 0, 0, 0.2), 0px 2px 3px -2px rgba(0, 0, 0, 0.6);
+          box-shadow: 0px 20px 20px -10px rgba(0, 0, 0, 0.3), 0px 8px 9px -4px rgba(0, 0, 0, 0.2), 0px 2px 3px -2px rgba(0, 0, 0, 0.6);
 }
 
 main .wrapper input:focus-within, main .wrapper input:focus, main .wrapper input:valid {
@@ -174,28 +229,75 @@ main .wrapper input[type="search"] {
   padding-right: 20px;
 }
 
+main header {
+  width: 100%;
+}
+
 main header h1 {
   position: relative;
+  margin: 30px 0;
   text-align: center;
   color: white;
   text-transform: uppercase;
   font-size: 26px;
   font-weight: 400;
   letter-spacing: 2px;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.7), 0 2px 2px rgba(0, 0, 0, 0.5);
 }
 
 main header h1::before, main header h1::after {
   content: '';
   position: absolute;
-  width: 200px;
+  width: 25%;
   height: 2px;
   top: calc(50% - 1px);
   left: 0;
   background: white;
+  -webkit-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7), 0 2px 2px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7), 0 2px 2px rgba(0, 0, 0, 0.3);
+  display: block;
 }
 
 main header h1::after {
   left: auto;
   right: 0;
+}
+
+main header h1 .number-tasks {
+  font-weight: 600;
+}
+
+main section {
+  width: 100%;
+}
+
+main section ul {
+  padding: 0;
+  -webkit-box-shadow: 0px 20px 20px -10px rgba(0, 0, 0, 0.3), 0px 8px 9px -4px rgba(0, 0, 0, 0.2), 0px 2px 3px -2px rgba(0, 0, 0, 0.6);
+          box-shadow: 0px 20px 20px -10px rgba(0, 0, 0, 0.3), 0px 8px 9px -4px rgba(0, 0, 0, 0.2), 0px 2px 3px -2px rgba(0, 0, 0, 0.6);
+  list-style-type: none;
+  border: 3px #E1E1E1 solid;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+main section ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+  background-image: -webkit-gradient(linear, left bottom, left top, from(white), to(#f7f7f7));
+  background-image: linear-gradient(0deg, white, #f7f7f7);
+}
+
+main section ul li + li {
+  border-top: 2px #dfdddd solid;
 }
 /*# sourceMappingURL=main.css.map */
