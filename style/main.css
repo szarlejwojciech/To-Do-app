@@ -34,10 +34,10 @@ button {
       -ms-flex-align: center;
           align-items: center;
   position: absolute;
-  z-index: 2;
+  font-size: 1em;
   right: 0;
-  width: 60px;
-  height: 60px;
+  width: 2.6em;
+  height: 2.6em;
   border: none;
   border-radius: 50%;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#55f685), to(#32af56));
@@ -59,8 +59,8 @@ button span {
 
 button span::before, button span::after {
   content: '';
-  width: 23px;
-  height: 6px;
+  width: 1em;
+  height: 0.26em;
   background: #fff;
   position: absolute;
   -webkit-transform: translate(-50%, -50%);
@@ -173,6 +173,12 @@ main {
   margin: 10% auto;
 }
 
+@media screen and (max-width: 750px) {
+  main {
+    width: 80%;
+  }
+}
+
 main form {
   width: 100%;
 }
@@ -187,12 +193,19 @@ main .wrapper {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  font-size: 23px;
+}
+
+@media screen and (max-width: 750px) {
+  main .wrapper {
+    font-size: 18px;
+  }
 }
 
 main .wrapper label {
   position: absolute;
   left: 20px;
-  font-size: 23px;
+  font-size: 1em;
   color: rgba(0, 0, 0, 0.3);
   z-index: 2;
   -webkit-transition: .3s transform ease, .1s color ease;
@@ -206,9 +219,9 @@ main .wrapper label {
 
 main .wrapper input {
   width: 100%;
-  padding: 14px 20px;
-  padding-right: 60px;
-  font-size: 23px;
+  padding: 0.6em 0.86em;
+  padding-right: 2.6em;
+  font-size: 1em;
   border: 3px solid #E1E1E1;
   border-radius: 60px;
   -webkit-box-shadow: 0px 20px 20px -10px rgba(0, 0, 0, 0.3), 0px 8px 9px -4px rgba(0, 0, 0, 0.2), 0px 2px 3px -2px rgba(0, 0, 0, 0.6);
@@ -221,8 +234,8 @@ main .wrapper input:focus-within, main .wrapper input:focus, main .wrapper input
 
 main .wrapper input:focus-within + label, main .wrapper input:focus + label, main .wrapper input:valid + label {
   color: white;
-  -webkit-transform: translate(-20px, -43px) scale(0.6);
-          transform: translate(-20px, -43px) scale(0.6);
+  -webkit-transform: translate(-0.87em, -1.87em) scale(0.6);
+          transform: translate(-0.87em, -1.87em) scale(0.6);
 }
 
 main .wrapper input[type="search"] {
@@ -243,6 +256,12 @@ main header h1 {
   font-weight: 400;
   letter-spacing: 2px;
   text-shadow: 0 4px 10px rgba(0, 0, 0, 0.7), 0 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (max-width: 750px) {
+  main header h1 {
+    font-size: 3.5vw;
+  }
 }
 
 main header h1::before, main header h1::after {

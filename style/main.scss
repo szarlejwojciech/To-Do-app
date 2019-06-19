@@ -2,6 +2,8 @@
 
 /* Variables */
 
+
+
 $drop-shadow: 0px 20px 20px -10px rgba(0, 0, 0, 0.3),
 0px 8px 9px -4px rgba(0, 0, 0, 0.2),
 0px 2px 3px -2px rgba(0, 0, 0, 0.6);
@@ -49,10 +51,10 @@ button {
   justify-content: center;
   align-items: center;
   position: absolute;
-  z-index: 2;
+  font-size: 1em;
   right: 0;
-  width: 60px;
-  height: 60px;
+  width: 2.6em;
+  height: 2.6em;
   border: none;
   border-radius: 50%;
   background-image: $green-gradient;
@@ -69,8 +71,8 @@ button {
     &::before,
     &::after {
       content: '';
-      width: 23px;
-      height: 6px;
+      width: 1em;
+      height: 0.26em;
       background: #fff;
       position: absolute;
       transform: translate(-50%, -50%);
@@ -180,6 +182,10 @@ main {
   width: 600px;
   margin: 10% auto;
 
+  @media screen and (max-width: 750px) {
+    width: 80%;
+  }
+
   form {
     width: 100%;
   }
@@ -190,12 +196,16 @@ main {
     position: relative;
     display: flex;
     align-items: center;
+    font-size: 23px;
 
+    @media screen and (max-width: 750px) {
+      font-size: 18px;
+    }
 
     label {
       position: absolute;
       left: 20px;
-      font-size: 23px;
+      font-size: 1em;
       color: rgba(0, 0, 0, .3);
       z-index: 2;
       transition: .3s transform ease, .1s color ease;
@@ -207,12 +217,14 @@ main {
 
     input {
       width: 100%;
-      padding: 14px 20px;
-      padding-right: 60px;
-      font-size: 23px;
+      padding: 0.6em 0.86em;
+      padding-right: 2.6em;
+      font-size: 1em;
       border: 3px solid #E1E1E1;
       border-radius: 60px;
       box-shadow: $drop-shadow;
+
+
 
       // &:hover,
       &:focus-within,
@@ -222,7 +234,7 @@ main {
 
         &+label {
           color: white;
-          transform: translate(-20px, -43px) scale(0.6);
+          transform: translate(-0.87em, -1.87em) scale(0.6);
         }
       }
 
@@ -247,6 +259,10 @@ main {
       text-shadow:
         0 4px 10px rgba(0, 0, 0, .7),
         0 2px 2px rgba(0, 0, 0, .5);
+
+      @media screen and (max-width: 750px) {
+        font-size: 3.5vw;
+      }
 
       &::before,
       &::after {
