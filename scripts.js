@@ -3,19 +3,27 @@ const form = document.querySelector('form');
 const list = document.querySelector('section ul');
 const tasks = (JSON.parse(localStorage.getItem('tasks'))) || [];
 const tasksNumber = document.querySelector('.number-tasks');
-//Functions
-const populateList = (items = [], list) => {
-  list.innerHTML = items.map((item, index) => {
-    return `
-    <li data-index="${index}">
-      ${item.text}
-      <button class="check ${item.check?'checked':''}" data-index="${index}"><span></span></button>
-      <button class="delete" data-index="${index}"><span></span></button>
-    </li>
-  `;
-  }).join('');
 
-  console.log(items);
+let reg;
+
+
+//Functions
+const populateList = (items = [], list, regEx = '') => {
+  const tasksHtml = items.map((item, index) => {
+    return {
+      html: `<li data-index="${index}">
+              ${item.text}
+              <button class="check ${item.check?'checked':''}" data-index="${index}"><span></span></button>
+              <button class="delete" data-index="${index}"><span></span></button>
+              </li>
+            `,
+      text: item.text
+    };
+  })
+
+  list.innerHTML = tasksHtml.filter(item => item.text.toUpperCase().includes(regEx)).map(item => item.html).join('');
+
+  console.log(tasksHtml);
 }
 
 const addTask = e => {
@@ -30,8 +38,7 @@ const addTask = e => {
 
   const task = {
     text: input.value.trim(),
-    check: false,
-    indexOf: tasks.length
+    check: false
   };
 
   tasks.push(task);
@@ -53,7 +60,7 @@ const removeTask = e => {
   tasksNumber.textContent = tasks.length;
 
   localStorage.setItem('tasks', JSON.stringify(tasks));
-  populateList(tasks, list);
+  populateList(tasks, list, reg);
 }
 
 const checkTask = e => {
@@ -63,17 +70,14 @@ const checkTask = e => {
   tasks[index].check = !tasks[index].check;
   localStorage.setItem('tasks', JSON.stringify(tasks));
 
-  populateList(tasks, list);
+  populateList(tasks, list, reg);
 }
 
 const searchTasks = e => {
-  const reg = e.target.value.toUpperCase();
-  const searchedList = tasks.filter((task, index) => task.text.toUpperCase().includes(reg)).map(item => `<li>${item.text}</li>`);
+  reg = e.target.value.toUpperCase();
+  tasksNumber.textContent = tasks.filter((task, index) => task.text.toUpperCase().includes(reg)).length;
 
-  reg ? list.innerHTML = searchedList.join('') : populateList(tasks, list);
-
-  tasksNumber.textContent = searchedList.length;
-
+  populateList(tasks, list, reg);
 }
 
 //Events listener
