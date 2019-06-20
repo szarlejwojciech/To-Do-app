@@ -59,7 +59,7 @@ button {
   border-radius: 50%;
   background-image: $green-gradient;
   box-shadow: $green-border;
-  transition: .5s transform, .5s box-shadow, .5s opacity;
+  transition: .5s transform, .5s box-shadow, .5s opacity, .5s background-image;
   will-change: transform, box-shadow, opacity;
   cursor: pointer;
 
@@ -126,6 +126,19 @@ button {
       &::after {
         width: 10px;
         transform: translate(-26%, -50%) rotate(-45deg);
+      }
+    }
+
+    &.checked {
+      background-image: $green-gradient;
+      box-shadow: $green-border, inset 0 0 0 100px #3DCC68;
+
+      & span {
+
+        &::before,
+        &::after {
+          background: #fff;
+        }
       }
     }
   }
@@ -295,18 +308,21 @@ main {
     width: 100%;
 
     ul {
+      min-height: 30px;
       padding: 0;
       box-shadow: $drop-shadow;
       list-style-type: none;
       border: 3px #E1E1E1 solid;
       border-radius: 10px;
       overflow: hidden;
+      background: #fff;
 
       li {
         display: flex;
         align-items: center;
         position: relative;
         padding: 14px;
+        padding-right: 90px;
         font-size: 16px;
         font-weight: 400;
         color: rgba(0, 0, 0, .6);
@@ -315,6 +331,7 @@ main {
         &+li {
           border-top: 2px #dfdddd solid;
         }
+
       }
     }
   }

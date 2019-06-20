@@ -44,8 +44,8 @@ button {
   background-image: linear-gradient(180deg, #55f685, #32af56);
   -webkit-box-shadow: inset 0 0 0 3px #3DCC68;
           box-shadow: inset 0 0 0 3px #3DCC68;
-  -webkit-transition: .5s transform, .5s box-shadow, .5s opacity;
-  transition: .5s transform, .5s box-shadow, .5s opacity;
+  -webkit-transition: .5s transform, .5s box-shadow, .5s opacity, .5s background-image;
+  transition: .5s transform, .5s box-shadow, .5s opacity, .5s background-image;
   will-change: transform, box-shadow, opacity;
   cursor: pointer;
 }
@@ -118,6 +118,17 @@ button.check span::after {
   width: 10px;
   -webkit-transform: translate(-26%, -50%) rotate(-45deg);
           transform: translate(-26%, -50%) rotate(-45deg);
+}
+
+button.check.checked {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#55f685), to(#32af56));
+  background-image: linear-gradient(180deg, #55f685, #32af56);
+  -webkit-box-shadow: inset 0 0 0 3px #3DCC68, inset 0 0 0 100px #3DCC68;
+          box-shadow: inset 0 0 0 3px #3DCC68, inset 0 0 0 100px #3DCC68;
+}
+
+button.check.checked span::before, button.check.checked span::after {
+  background: #fff;
 }
 
 button.delete {
@@ -291,6 +302,7 @@ main section {
 }
 
 main section ul {
+  min-height: 30px;
   padding: 0;
   -webkit-box-shadow: 0px 20px 20px -10px rgba(0, 0, 0, 0.3), 0px 8px 9px -4px rgba(0, 0, 0, 0.2), 0px 2px 3px -2px rgba(0, 0, 0, 0.6);
           box-shadow: 0px 20px 20px -10px rgba(0, 0, 0, 0.3), 0px 8px 9px -4px rgba(0, 0, 0, 0.2), 0px 2px 3px -2px rgba(0, 0, 0, 0.6);
@@ -298,6 +310,7 @@ main section ul {
   border: 3px #E1E1E1 solid;
   border-radius: 10px;
   overflow: hidden;
+  background: #fff;
 }
 
 main section ul li {
@@ -309,6 +322,7 @@ main section ul li {
           align-items: center;
   position: relative;
   padding: 14px;
+  padding-right: 90px;
   font-size: 16px;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.6);
