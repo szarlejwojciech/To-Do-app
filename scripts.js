@@ -51,6 +51,27 @@ const addTask = e => {
 
 }
 
+const activDeleteAnimation = (currentEl, index) => {
+  currentEl.style.animation = "disapear .6s .1s both cubic-bezier(.71, -0.17, .77, .78) running";
+  //round corners transition
+  if (index == 0 && document.querySelector('li[data-index="1"]'))
+    document.querySelector('li[data-index="1"]').style.borderRadius = '10px 10px 0 0';
+  // else if
+  //slide up animation after delete tasks
+  const slideUpTasks = document.querySelectorAll(`li:nth-of-type(${index * 1 + 1})~li`);
+
+  slideUpTasks.forEach((el, x) => {
+    el.style.animationPlayState = 'paused';
+    el.style.animation = "moveUp .3s both cubic-bezier(.39, .85, .68, .8) running";
+    el.style.animationDelay = `${.4 + x / 30}s`;
+  });
+  //populate list after animation
+  if (slideUpTasks.length)
+    slideUpTasks[slideUpTasks.length - 1].addEventListener('animationend', () => populateList(tasks, list, reg));
+  else
+    currentEl.addEventListener('animationend', () => populateList(tasks, list, reg));
+}
+
 const removeTask = e => {
   if (!(e.target.classList.contains('delete'))) return;
 
@@ -60,7 +81,11 @@ const removeTask = e => {
   tasksNumber.textContent = tasks.length;
 
   localStorage.setItem('tasks', JSON.stringify(tasks));
-  populateList(tasks, list, reg);
+
+  //deleting animation
+  activDeleteAnimation(e.target.parentNode, index);
+
+  // window.setTimeout(() => populateList(tasks, list, reg), 2000);
 }
 
 const checkTask = e => {

@@ -304,13 +304,7 @@ main section {
 main section ul {
   min-height: 30px;
   padding: 0;
-  -webkit-box-shadow: 0px 20px 20px -10px rgba(0, 0, 0, 0.3), 0px 8px 9px -4px rgba(0, 0, 0, 0.2), 0px 2px 3px -2px rgba(0, 0, 0, 0.6);
-          box-shadow: 0px 20px 20px -10px rgba(0, 0, 0, 0.3), 0px 8px 9px -4px rgba(0, 0, 0, 0.2), 0px 2px 3px -2px rgba(0, 0, 0, 0.6);
   list-style-type: none;
-  border: 3px #E1E1E1 solid;
-  border-radius: 10px;
-  overflow: hidden;
-  background: #fff;
 }
 
 main section ul li {
@@ -326,11 +320,76 @@ main section ul li {
   font-size: 16px;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.6);
+  border-left: 3px #E1E1E1 solid;
+  border-right: 3px #E1E1E1 solid;
   background-image: -webkit-gradient(linear, left bottom, left top, from(white), to(#f7f7f7));
   background-image: linear-gradient(0deg, white, #f7f7f7);
+  -webkit-transition: border-radius 6s .3s ease-out;
+  transition: border-radius 6s .3s ease-out;
+}
+
+main section ul li:first-of-type {
+  border: 3px #e1e1e1 solid;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom: none;
+}
+
+main section ul li:last-of-type {
+  border: 3px #e1e1e1 solid;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 main section ul li + li {
   border-top: 2px #dfdddd solid;
+}
+
+@-webkit-keyframes disapear {
+  0% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+}
+
+@keyframes disapear {
+  0% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+}
+
+@-webkit-keyframes moveUp {
+  0% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  100% {
+    -webkit-transform: translateY(-46px);
+            transform: translateY(-46px);
+  }
+}
+
+@keyframes moveUp {
+  0% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  100% {
+    -webkit-transform: translateY(-46px);
+            transform: translateY(-46px);
+  }
 }
 /*# sourceMappingURL=main.css.map */
