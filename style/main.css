@@ -324,8 +324,8 @@ main section ul li {
   border-right: 3px #E1E1E1 solid;
   background-image: -webkit-gradient(linear, left bottom, left top, from(white), to(#f7f7f7));
   background-image: linear-gradient(0deg, white, #f7f7f7);
-  -webkit-transition: border-radius .6s .3s ease-out;
-  transition: border-radius .6s .3s ease-out;
+  -webkit-transition: border .6s .3s ease-out;
+  transition: border .6s .3s ease-out;
 }
 
 main section ul li:first-of-type {
