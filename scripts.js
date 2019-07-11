@@ -52,11 +52,23 @@ const addTask = e => {
 }
 
 const activDeleteAnimation = (currentEl, index) => {
+  console.log([currentEl]);
+
   currentEl.style.animation = "disapear .6s .1s both cubic-bezier(.71, -0.17, .77, .78) running";
+
   //round corners transition
-  if (index == 0 && document.querySelector('li[data-index="1"]'))
-    document.querySelector('li[data-index="1"]').style.borderRadius = '10px 10px 0 0';
-  // else if
+  const firstEl = list.children[1];
+
+  if (index == 0 && firstEl)
+    firstEl.style.borderRadius = '10px 10px 0 0';
+  else if (currentEl === list.lastElementChild) {
+
+    const beforeLastEl = list.children[index - 1];
+
+    beforeLastEl.style.borderRadius = '0 0 10px 10px';
+    beforeLastEl.style.borderBottom = '3px #e1e1e1 solid';
+  };
+
   //slide up animation after delete tasks
   const slideUpTasks = document.querySelectorAll(`li:nth-of-type(${index * 1 + 1})~li`);
 
