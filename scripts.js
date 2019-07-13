@@ -23,7 +23,19 @@ const populateList = (items = [], list, regEx = '') => {
 
   list.innerHTML = tasksHtml.filter(item => item.text.toUpperCase().includes(regEx)).map(item => item.html).join('');
 
-  console.log(tasksHtml);
+}
+
+const activeAddAnimation = () => {
+  //play add task animation
+  list.lastElementChild.style.animation = 'addAnimation .7s .2s both cubic-bezier(.3, 1.31, .56, 1.91) running';
+
+  //and round corners before added task
+  const beforeLastEl = list.children[list.children.length - 2];
+  if (beforeLastEl)
+    beforeLastEl.style.animation = 'roundingBottomCorners .5s .2s both ease-out reverse running';
+
+  //deleting animations
+  window.setTimeout(() => [...list.children].forEach(task => task.style.animation = ''), 1000)
 }
 
 const addTask = e => {
@@ -49,28 +61,27 @@ const addTask = e => {
   input.value = '';
   tasksNumber.textContent = tasks.length;
 
+  //add task animation
+  activeAddAnimation();
 }
 
 const activDeleteAnimation = (currentEl, index) => {
-  console.log([currentEl]);
+  const allTasks = [...list.children];
+  //deleting animations
+  window.setTimeout(() => allTasks.forEach(task => task.style.animation = ''), 1000)
+  //add delete task animation
+  currentEl.style.animation = "disapear .6s .1s  cubic-bezier(.71, -0.17, .77, .78) running";
+  //add border radius animation
+  if (index == 0 && allTasks[1]) {
+    allTasks[1].style.borderTopLeftRadius = '10px';
+    allTasks[1].style.borderTopRightRadius = '10px';
+  } else if (index == 1 && !allTasks[2])
+    allTasks[0].style.animation = 'roundingBottomCorners .5s .2s  ease-out running';
+  else if (index == allTasks.length - 1 && allTasks[index - 1])
+    allTasks[index - 1].style.animation = 'roundingBottomCorners .5s .2s  ease-out running';
 
-  currentEl.style.animation = "disapear .6s .1s both cubic-bezier(.71, -0.17, .77, .78) running";
-
-  //round corners transition
-  const firstEl = list.children[1];
-
-  if (index == 0 && firstEl)
-    firstEl.style.borderRadius = '10px 10px 0 0';
-  else if (currentEl === list.lastElementChild) {
-
-    const beforeLastEl = list.children[index - 1];
-
-    beforeLastEl.style.borderRadius = '0 0 10px 10px';
-    beforeLastEl.style.borderBottom = '3px #e1e1e1 solid';
-  };
-
-  //slide up animation after delete tasks
-  const slideUpTasks = document.querySelectorAll(`li:nth-of-type(${index * 1 + 1})~li`);
+  //add slide up animation after delete task
+  const slideUpTasks = allTasks.filter((task, x) => x > index);
 
   slideUpTasks.forEach((el, x) => {
     el.style.animationPlayState = 'paused';
@@ -91,13 +102,10 @@ const removeTask = e => {
 
   tasks.splice(index, 1);
   tasksNumber.textContent = tasks.length;
-
   localStorage.setItem('tasks', JSON.stringify(tasks));
 
   //deleting animation
   activDeleteAnimation(e.target.parentNode, index);
-
-  // window.setTimeout(() => populateList(tasks, list, reg), 2000);
 }
 
 const checkTask = e => {

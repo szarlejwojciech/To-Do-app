@@ -310,8 +310,9 @@ main {
     ul {
       min-height: 30px;
       padding: 0;
-      // box-shadow: $drop-shadow;
       list-style-type: none;
+      perspective: 600px;
+      transform-style: preserve-3d;
       // border: 3px #E1E1E1 solid;
       // border-radius: 10px;
       // overflow: hidden;
@@ -326,27 +327,30 @@ main {
         font-size: 16px;
         font-weight: 400;
         color: rgba(0, 0, 0, .6);
-        border-left: 3px #E1E1E1 solid;
-        border-right: 3px #E1E1E1 solid;
+        border: 3px #E1E1E1 solid;
+        border-bottom: none;
+        // border-right: 3px #E1E1E1 solid;
         background-image: linear-gradient(0deg, white, #f7f7f7);
-        transition: border .6s .3s ease-out;
-
-        // animation:
-        //   disapear .7s .2s both cubic-bezier(.71, -0.17, .77, .78),
-        //   moveUp .7s 1s both cubic-bezier(.39, .85, .68, .8);
-        // animation-play-state: paused, paused;
+        box-shadow: $drop-shadow;
+        transition: border-radius .5s .2s ease-out;
 
         &:first-of-type {
-          border: 3px #e1e1e1 solid;
+          // border: 3px #e1e1e1 solid;
           border-top-left-radius: 10px;
           border-top-right-radius: 10px;
-          border-bottom: none;
+          // border-bottom: transparent;
         }
 
         &:last-of-type {
           border: 3px #e1e1e1 solid;
           border-bottom-left-radius: 10px;
           border-bottom-right-radius: 10px;
+
+
+
+          // animation: addAnimation .7s .2s both cubic-bezier(.3, 1.31, .56, 1.91) running;
+          // animation-play-state: paused;
+
         }
 
         &+li {
@@ -378,5 +382,45 @@ main {
 
   100% {
     transform: translateY(-46px);
+  }
+}
+
+@keyframes addAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%) translateZ(-25px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0%) translateZ(0);
+  }
+}
+
+@keyframes roundingBottomCorners {
+  0% {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: none;
+  }
+
+  100% {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom: 3px #e1e1e1 solid;
+  }
+}
+
+@keyframes roundingTopCorners {
+  0% {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: none;
+  }
+
+  100% {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top: 3px #e1e1e1 solid;
   }
 }
