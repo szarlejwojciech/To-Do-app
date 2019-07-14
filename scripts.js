@@ -22,7 +22,16 @@ const populateList = (items = [], list, regEx = '') => {
   })
 
   list.innerHTML = tasksHtml.filter(item => item.text.toUpperCase().includes(regEx)).map(item => item.html).join('');
+}
 
+const updateTasksNumber = (el, num) => {
+
+  el.classList.add('change');
+
+  el.addEventListener('transitionend', () => {
+    el.textContent = num;
+    el.classList.remove('change')
+  });
 }
 
 const activeAddAnimation = () => {
@@ -59,7 +68,7 @@ const addTask = e => {
   populateList(tasks, list);
 
   input.value = '';
-  tasksNumber.textContent = tasks.length;
+  updateTasksNumber(tasksNumber, tasks.length);
 
   //add task animation
   activeAddAnimation();
@@ -101,9 +110,9 @@ const removeTask = e => {
   const index = e.target.dataset.index;
 
   tasks.splice(index, 1);
-  tasksNumber.textContent = tasks.length;
   localStorage.setItem('tasks', JSON.stringify(tasks));
 
+  updateTasksNumber(tasksNumber, tasks.length);
   //deleting animation
   activDeleteAnimation(e.target.parentNode, index);
 }
@@ -120,7 +129,8 @@ const checkTask = e => {
 
 const searchTasks = e => {
   reg = e.target.value.toUpperCase();
-  tasksNumber.textContent = tasks.filter((task, index) => task.text.toUpperCase().includes(reg)).length;
+
+  updateTasksNumber(tasksNumber, tasks.filter((task, index) => task.text.toUpperCase().includes(reg)).length);
 
   populateList(tasks, list, reg);
 }
