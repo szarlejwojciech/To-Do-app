@@ -340,7 +340,7 @@ main {
         border-bottom: none;
         background-image: linear-gradient(0deg, white, #f7f7f7);
         box-shadow: $drop-shadow;
-        transition: border-radius .5s .2s ease-out;
+        // transition: border-radius .5s .2s ease-out;
 
         &:first-of-type {
           border-top-left-radius: 10px;
