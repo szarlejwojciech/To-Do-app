@@ -25,9 +25,9 @@ const populateList = (items = [], list, regEx = '') => {
 }
 
 const updateTasksNumber = (el, num) => {
-  const tlm = new TimelineMax();
+  const changeNumAnim = new TimelineMax();
 
-  tlm
+  changeNumAnim
     .set(el.parentNode, { css: { transformStyle: "preserve-3d" } })
     .set(el, { transformOrigin: "50% 50% -10px", transformPerspective: 600, rotationX: 0, backfaceVisibility: "hidden" })
     .to(el, .4, { rotationX: 180, opacity: 0 })
@@ -36,13 +36,18 @@ const updateTasksNumber = (el, num) => {
 }
 
 const activeAddAnimation = () => {
-  const tlm2 = new TimelineMax();
+  const addAnim = new TimelineMax();
+  const lastEl = list.lastElementChild;
+  const beforeLastEl = list.children[list.children.length - 2] || false;
 
-  tlm2
-    .set(list.children[list.children.length - 2], { borderBottomSize: "3px", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px" }, 0)
-    .set(list.lastElementChild, { transformPerspective: "600", y: "-=100%", z: -100, opacity: 0 })
-    .to(list.lastElementChild, .6, { y: "+=100%", z: 0, opacity: 1, ease: Back.easeOut.config(3) }, "+=.2")
-    .to(list.children[list.children.length - 2], .3, { borderBottomWidth: 0, borderBottomLeftRadius: 0, borderBottomRightRadius: 0 }, .1);
+  if (beforeLastEl) {
+    addAnim
+      .set(beforeLastEl, { borderBottomWidth: "3px", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px" }, 0)
+      .to(beforeLastEl, .3, { borderBottomWidth: 0, borderBottomLeftRadius: 0, borderBottomRightRadius: 0 }, "+=.1");
+  }
+  addAnim
+    .set(lastEl, { transformPerspective: "600", y: "-=100%", z: -100, opacity: 0 }, 0)
+    .to(lastEl, .6, { y: "+=100%", z: 0, opacity: 1, ease: Back.easeOut.config(3) }, "-=.2")
 }
 
 const addTask = e => {
@@ -79,29 +84,29 @@ const activDeleteAnimation = (currentEl, index) => {
   const allTasks = [...list.children];
   const slideUpTasks = allTasks.filter((task, x) => x > index);
   const lastIndex = allTasks.length - 1;
-  const tlm = new TimelineMax();
+  const delAnim = new TimelineMax();
 
-  tlm
+  delAnim
     .to(currentEl, .5, { opacity: 0, scale: 0, ease: Back.easeIn.config(2) }, "deleteTask")
-    .staggerTo(slideUpTasks, .2, { y: "-=100%" }, ".05", "deleteTask+=.2")
+    .to(slideUpTasks, .4, { y: "-=100%", ease: Back.easeIn.config(2) }, "deleteTask+=.2")
 
   if (index == 0 && allTasks[1])
-    tlm.to(allTasks[1], .2, {
+    delAnim.to(allTasks[1], .2, {
       borderTopLeftRadius: "10px",
       borderTopRightRadius: "10px",
-      borderTopSize: "3px",
+      borderTopWidth: "3px",
       borderTopColor: "#e3e3e3",
       borderTopStyle: "solid"
     }, "deleteTask")
   else if (currentEl === allTasks[lastIndex] && allTasks[lastIndex - 1])
-    tlm.to(allTasks[lastIndex - 1], .2, {
+    delAnim.to(allTasks[lastIndex - 1], .2, {
       borderBottomLeftRadius: "10px",
       borderBottomRightRadius: "10px",
-      borderBottomSize: "3px",
+      borderBottomWidth: "3px",
       borderBottomColor: "#e3e3e3",
       borderBottomStyle: "solid"
     }, "deleteTask")
-  tlm.eventCallback("onComplete", () => {
+  delAnim.eventCallback("onComplete", () => {
     populateList(tasks, list, reg);
     running = false;
   });
@@ -132,7 +137,15 @@ const searchTasks = e => {
   reg = e.target.value.toUpperCase();
   const numTasks = tasks.filter((task, index) => task.text.toUpperCase().includes(reg)).length;
   updateTasksNumber(tasksNumber, numTasks);
-  populateList(tasks, list, reg);
+
+  //searche animation
+  const searchAnim = new TimelineMax();
+
+  searchAnim
+    .to(list, .3, { opacity: 0, scale: 0, ease: Power2.easeIn })
+    .addCallback(() => populateList(tasks, list, reg))
+    .to(list, .3, { opacity: 1, scale: 1, ease: Back.easeOut.config(1) })
+  // populateList(tasks, list, reg);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -149,13 +162,15 @@ document.addEventListener('DOMContentLoaded', () => {
   populateList(tasks, list);
 
   //animation on entry
-  const tl = new TimelineMax();
+  const onLoadAnim = new TimelineMax();
 
-  tl
+  onLoadAnim
     .set(".wrapper, header", { y: 1000, opacity: 0 })
     .set("ul > li", { opacity: 0 })
     .staggerTo(".wrapper, header", .4, { y: 0, opacity: 1 }, .2)
-    .staggerFromTo("ul>li", .5, { cycle: { x: [-600, 600], rotationZ: [20, -20] }, y: 40 }, { opacity: 1, x: 0, rotationZ: 0, y: 40, cycle: {} }, .2, "+=.2")
+    .staggerFromTo("ul>li", .5, { cycle: { x: [-600, 600], rotationZ: [20, -20] }, y: 40 }, { opacity: 1, x: 0, rotationZ: 0, y: 0, cycle: {} }, .2, "+=.2")
+    .addLabel("buttons", "-=.5")
     .staggerFromTo(".check", .2, { scale: 0 }, { scale: 1, ease: Back.easeOut.config(1, 0.4) }, .1, "buttons")
     .staggerFromTo(".delete", .2, { scale: 0 }, { scale: 1, ease: Back.easeOut.config(1, 0.4) }, .1, "buttons")
+    .timeScale(1.5);
 })

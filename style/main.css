@@ -349,7 +349,7 @@ main section ul li:first-of-type {
 }
 
 main section ul li:last-of-type {
-  border: 3px #e1e1e1 solid;
+  border-bottom: 3px #e1e1e1 solid;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
