@@ -33,6 +33,7 @@ const updateTasksNumber = (el, num) => {
     .to(el, .4, { rotationX: 180, opacity: 0 })
     .add(() => el.textContent = num)
     .to(el, .4, { rotationX: 360, opacity: 1 })
+
 }
 
 const activeAddAnimation = () => {
@@ -88,7 +89,7 @@ const activDeleteAnimation = (currentEl, index) => {
 
   delAnim
     .to(currentEl, .5, { opacity: 0, scale: 0, ease: Back.easeIn.config(2) }, "deleteTask")
-    .to(slideUpTasks, .4, { y: "-=100%", ease: Back.easeIn.config(2) }, "deleteTask+=.2")
+    .to(slideUpTasks, .4, { y: "-=100%", ease: Back.easeIn.config(2) }, "deleteTask+=.2");
 
   if (index == 0 && allTasks[1])
     delAnim.to(allTasks[1], .2, {
@@ -140,12 +141,10 @@ const searchTasks = e => {
 
   //searche animation
   const searchAnim = new TimelineMax();
-
   searchAnim
     .to(list, .3, { opacity: 0, scale: 0, ease: Power2.easeIn })
     .addCallback(() => populateList(tasks, list, reg))
     .to(list, .3, { opacity: 1, scale: 1, ease: Back.easeOut.config(1) })
-  // populateList(tasks, list, reg);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
