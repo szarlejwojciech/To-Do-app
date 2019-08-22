@@ -36,14 +36,16 @@ inset 2px 2px 1px 3px rgba(0, 0, 0, 0.05);
 body {
   font: 500 16px/100% 'Poppins', sans-serif;
   min-height: 100vh;
+  overflow-x: hidden;
   background:
     linear-gradient(135deg, #F45E7D 0%, rgba(255, 35, 64, 0)70%),
     linear-gradient(225deg, #6E73FF 10%, rgba(51, 58, 253, 0) 80%),
     linear-gradient(315deg, #48FF98 10%, rgba(9, 245, 48, 0) 80%),
     linear-gradient(45deg, #DC48FF 100%, rgba(255, 251, 22, 0)50%);
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 button {
@@ -60,7 +62,7 @@ button {
   background-image: $green-gradient;
   box-shadow: $green-border;
   transition: .5s transform, .5s box-shadow, .5s opacity, .5s background-image;
-  will-change: transform, box-shadow, opacity;
+  will-change: transform, box-shadow, opacity, background-image;
   cursor: pointer;
 
   span {
@@ -82,7 +84,6 @@ button {
       transform: translate(-50%, -50%) rotate(90deg);
     }
   }
-
 
   &::after {
     content: '';
@@ -193,10 +194,12 @@ button {
 
 main {
   width: 600px;
-  margin: 10% auto;
+  margin: 100px auto auto;
+  flex-grow: 1;
 
   @media screen and (max-width: 750px) {
     width: 80%;
+    margin: 20px auto;
   }
 
   form {
@@ -237,9 +240,6 @@ main {
       border-radius: 60px;
       box-shadow: $drop-shadow;
 
-
-
-      // &:hover,
       &:focus-within,
       &:focus,
       &:valid {
@@ -303,6 +303,7 @@ main {
         transition:
           transform .15s cubic-bezier(.43, .9, .6, .15),
           opacity .15s cubic-bezier(.43, .9, .6, .15);
+        will-change: transform, opacity;
 
         &.change {
           // animation: pumpIt 0.3s cubic-bezier(.43, .9, .6, .15) both;
@@ -360,9 +361,22 @@ main {
       }
     }
   }
-
 }
-
+footer{
+  justify-self: flex-end;
+  flex-grow: 0;
+  line-height: 4.3em;
+  font-size: .9em;
+  font-weight: 500;
+  color: hsl(216, 100%, 50%);
+  text-align: center;
+  background: 
+  linear-gradient(270deg, hsl(206, 100%, 50%),hsl(221, 100%, 50%), hsl(306, 100%, 50%));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+// animations used in ./js/scripts.js
+/* 
 @keyframes disapear {
   0% {
     opacity: 1;
@@ -436,4 +450,4 @@ main {
     transform: scale(1.2);
   }
 
-}
+} */

@@ -33,7 +33,6 @@ const updateTasksNumber = (el, num) => {
     .to(el, .4, { rotationX: 180, opacity: 0 })
     .add(() => el.textContent = num)
     .to(el, .4, { rotationX: 360, opacity: 1 })
-
 }
 
 const activeAddAnimation = () => {
@@ -164,12 +163,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const onLoadAnim = new TimelineMax();
 
   onLoadAnim
+    .set("footer", { x: "150%" })
     .set(".wrapper, header", { y: 1000, opacity: 0 })
     .set("ul > li", { opacity: 0 })
     .staggerTo(".wrapper, header", .4, { y: 0, opacity: 1 }, .2)
-    .staggerFromTo("ul>li", .5, { cycle: { x: [-600, 600], rotationZ: [20, -20] }, y: 40 }, { opacity: 1, x: 0, rotationZ: 0, y: 0, cycle: {} }, .2, "+=.2")
-    .addLabel("buttons", "-=.5")
-    .staggerFromTo(".check", .2, { scale: 0 }, { scale: 1, ease: Back.easeOut.config(1, 0.4) }, .1, "buttons")
-    .staggerFromTo(".delete", .2, { scale: 0 }, { scale: 1, ease: Back.easeOut.config(1, 0.4) }, .1, "buttons")
+    .addLabel("items", "+=.2")
+    .staggerFromTo("ul>li", .5, { cycle: { x: [-600, 600], rotationZ: [20, -20] }, y: 40 }, { opacity: 1, x: 0, rotationZ: 0, y: 0, cycle: {} }, .1, "items")
+    .staggerFromTo(".check", .5, { scale: 0 }, { scale: 1, ease: Back.easeOut.config(1, 0.4) }, .1, "items+=.2")
+    .staggerFromTo(".delete", .5, { scale: 0 }, { scale: 1, ease: Back.easeOut.config(1, 0.4) }, .1, "items+=.2")
+    .to("footer", 1, { x: "0%", ease: Back.easeOut.config(2, .4) })
     .timeScale(1.5);
 })
