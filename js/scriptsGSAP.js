@@ -51,6 +51,7 @@ const activeAddAnimation = () => {
   const beforeLastEl = list.children[list.children.length - 2] || false;
 
   if (beforeLastEl) {
+    debugger;
     addAnim
       .set(
         beforeLastEl,
